@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("reviews", (table) => {
-    table.integer("review_id").primary();
+    table.increments("review_id").primary();
     table.text("content");
     table.integer("score");
     table.integer("critic_id").unsigned().notNullable();
@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .references("critic_id")
       .inTable("critics")
       .onDelete("cascade");
-    table.integer("movie_id").unsigned().notNullable();
+    table.integer("movie_id").unsigned();
     table
       .foreign("movie_id")
       .references("movie_id")
